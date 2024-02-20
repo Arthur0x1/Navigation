@@ -148,8 +148,10 @@ public class Application {
             System.out.println("Room does not exist");
         } else {
             //List<Room> path = findPath(currentRoom, nextRoom);
-            System.out.printf("path: [%s]\n", path.stream().map(Room::getName)
-                    .collect(Collectors.joining(" ")));
+            //System.out.printf("path: [%s]\n", path.stream().map(Room::getName)
+                    //.collect(Collectors.joining(" ")));
+            List<Room> path = ShortestPathFinder.findShortestPath(currentRoom, nextRoom);
+            System.out.println(path.stream().map(Room::getName).collect(Collectors.joining(" ")));
             currentRoom = nextRoom;
             System.out.println(currentRoom);
         }

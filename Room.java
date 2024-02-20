@@ -2,19 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
 
-/**
- * Class Room - a room in an adventure game.
- * <p>
- * This class is part of the "World of Zuul" application.
- * "World of Zuul" is a very simple, text based adventure game.
- * <p>
- * A "Room" represents one location in the scenery of the game.  It is
- * connected to other rooms via exits.  For each existing exit, the room
- * stores a reference to the neighboring room.
- *
- * @author Michael Kölling and David J. Barnes
- * @version 2016.02.29
- */
 public enum Room {
     FORUM,
     // H1
