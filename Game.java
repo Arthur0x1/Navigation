@@ -44,12 +44,25 @@ public class Game {
         forum.setExit("h6", h6);
         h6.setExit("forum", forum);
 
+        // h2 <> h6
         h6.setExit("h2", h2);
+        h2.setExit("h6", h6);
 
+        // h1 <> h2
         h2.setExit("h1", h1);
+        h1.setExit("h1", h2);
+
+        // h2 <> h3
         h2.setExit("h3", h3);
+        h3.setExit("h2", h2);
+
+        // h2 <> h4
         h2.setExit("h4", h4);
+        h4.setExit("h2", h2);
+
+        // h2 <> h5
         h2.setExit("h5", h5);
+        h5.setExit("h2", h2);
     }
 
     /**
