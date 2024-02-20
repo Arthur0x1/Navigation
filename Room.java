@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class Room - a room in an adventure game.
@@ -80,7 +78,9 @@ public enum Room {
         return exits.get(direction);
     }
 
-
+    public Collection<Room> getAllExits(){
+        return exits.values();
+    }
     @Override
     public String toString() {
         return "You are in %s\n%s".formatted(getName(), getExitString());
