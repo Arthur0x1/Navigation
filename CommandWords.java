@@ -42,20 +42,11 @@ public class CommandWords {
     }
 
     /**
-     * Check whether a given String is a valid command word.
-     *
-     * @return true if it is, false if it isn't.
-     */
-    public boolean isCommand(String aString) {
-        return validCommands.containsKey(aString);
-    }
-
-    /**
      * Print all valid commands to System.out.
      */
     public void showAll() {
         for (String command : validCommands.keySet()) {
-            System.out.print(command + "  ");
+            System.out.print(command + " ");
         }
         System.out.println();
     }

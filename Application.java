@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Application {
     private final Parser parser = new Parser();
@@ -11,8 +12,8 @@ public class Application {
 
         while (true) {
             Command command = parser.getCommand();
-            boolean success = processCommand(command);
-            if (!success) break;
+            boolean requestsQuit = processCommand(command);
+            if (requestsQuit) break;
         }
     }
 
@@ -27,7 +28,7 @@ public class Application {
         boolean wantToQuit = false;
 
         switch (commandWord) {
-            case UNKNOWN -> System.out.println("I don't know what you mean...");
+            case UNKNOWN -> System.out.println("Unknown command");
             case HELP -> printHelp();
             case GO -> goRoom(command);
             case QUIT -> wantToQuit = quit(command);
@@ -137,13 +138,16 @@ public class Application {
         }
 
         String direction = command.secondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        //Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = Room.fromString(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            //System.out.println("There is no door!");
+            System.out.println("Room does not exist");
         } else {
+            List<Room> path = findPath(currentRoom, nextRoom);
+            System.out.printf("path: [%s]\n", path.stream().map(Room::getName)
+                    .collect(Collectors.joining(" ")));
             currentRoom = nextRoom;
             System.out.println(currentRoom);
         }

@@ -16,16 +16,15 @@ import java.util.Set;
  * @version 2016.02.29
  */
 public enum Room {
-    FORUM("Het forum"),
-    H1("Hantal 1"),
-    H2("Hantal 2"),
-    H3("Hantal 3"),
-    H4("Hantal 4"),
-    H5("Hantal 5"),
-    H6("Hantal 6");
+    FORUM,
+    H1,
+    H2,
+    H3,
+    H4,
+    H5,
+    H6;
 
-    private final String description;
-    private final Map<String, Room> exits;
+    private final Map<String, Room> exits = new HashMap<>();
 
     static {
         FORUM.setExits(H6);
@@ -33,16 +32,12 @@ public enum Room {
         H2.setExits(H1, H3, H4, H5);
     }
 
-    /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
-     *
-     * @param description The room's description.
-     */
-    Room(String description) {
-        this.description = description;
-        exits = new HashMap<>();
+    static Room fromString(String str) {
+        try {
+            return valueOf(str.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /*
