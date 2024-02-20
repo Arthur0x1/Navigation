@@ -28,7 +28,7 @@ public class ShortestPathFinder {
             }
         }
 
-        return null; // Geen pad gevonden van start naar eind
+        throw new IllegalStateException("All paths are connected, no path found, this should not happen");
     }
 
     // Methode om het pad van de eindkamer naar de startkamer opnieuw op te bouwen vanuit de kaart van kamers
