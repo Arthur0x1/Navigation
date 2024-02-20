@@ -56,19 +56,8 @@ public enum Room {
         }
     }
 
-    private String getName() {
+    public String getName() {
         return name().toLowerCase();
-    }
-
-    /**
-     * Return a description of the room in the form:
-     * You are in the kitchen.
-     * Exits: north west
-     *
-     * @return A long description of this room
-     */
-    public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString();
     }
 
     /**
@@ -94,6 +83,12 @@ public enum Room {
      */
     public Room getExit(String direction) {
         return exits.get(direction);
+    }
+
+
+    @Override
+    public String toString() {
+        return "You are in %s\n%s".formatted(getName(), getExitString());
     }
 }
 
