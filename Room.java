@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Class Room - a room in an adventure game.
@@ -17,14 +16,35 @@ import java.util.Set;
  */
 public enum Room {
     FORUM,
-    H1,
-    H2,
-    H3,
-    H4,
-    H5,
-    H6;
+    // H1
+    H1_1,
+    H1_2,
+    H1_3,
+    H1_4,
+    // H2
+    H2_1,
+    H2_2,
+    H2_3,
+    // H3
+    H3_1,
+    H3_2,
+    H3_3,
+    // H4
+    H4_1,
+    H4_2,
+    H4_3,
+    H5_1,
+    H5_2,
+    H6_1,
+    H6_2;
 
+    private final int x, y;
     private final Map<String, Room> exits = new HashMap<>();
+
+    Room(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     static {
         FORUM.setExits(H6);
