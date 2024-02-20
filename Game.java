@@ -16,54 +16,8 @@
  */
 
 public class Game {
-    private final Parser parser;
-    private Room currentRoom;
-
-    /**
-     * Create the game and initialise its internal map.
-     */
-    public Game() {
-        createRooms();
-        parser = new Parser();
-    }
-
-    /**
-     * Create all the rooms and link their exits together.
-     */
-    private void createRooms() {
-        Room forum = new Room("Het forum");
-        Room h1 = new Room("Hantal 1");
-        Room h2 = new Room("Hantal 2");
-        Room h3 = new Room("Hantal 3");
-        Room h4 = new Room("Hantal 4");
-        Room h5 = new Room("Hantal 5");
-        Room h6 = new Room("Hantal 6");
-
-        currentRoom = forum;  // start game outside
-
-        forum.setExit("h6", h6);
-        h6.setExit("forum", forum);
-
-        // h2 <> h6
-        h6.setExit("h2", h2);
-        h2.setExit("h6", h6);
-
-        // h1 <> h2
-        h2.setExit("h1", h1);
-        h1.setExit("h1", h2);
-
-        // h2 <> h3
-        h2.setExit("h3", h3);
-        h3.setExit("h2", h2);
-
-        // h2 <> h4
-        h2.setExit("h4", h4);
-        h4.setExit("h2", h2);
-
-        // h2 <> h5
-        h2.setExit("h5", h5);
-        h5.setExit("h2", h2);
-    }
+    private final Parser parser = new Parser();
+    private Room currentRoom = Room.FORUM;
 
     /**
      * Main play routine.  Loops until end of play.
@@ -101,26 +55,14 @@ public class Game {
      * @return true If the command ends the game, false otherwise.
      */
     private boolean processCommand(Command command) {
+        CommandWord commandWord = command.commandWord();
         boolean wantToQuit = false;
 
-        CommandWord commandWord = command.commandWord();
-
         switch (commandWord) {
-            case UNKNOWN:
-                System.out.println("I don't know what you mean...");
-                break;
-
-            case HELP:
-                printHelp();
-                break;
-
-            case GO:
-                goRoom(command);
-                break;
-
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
+            case UNKNOWN -> System.out.println("I don't know what you mean...");
+            case HELP -> printHelp();
+            case GO -> goRoom(command);
+            case QUIT -> wantToQuit = quit(command);
         }
         return wantToQuit;
     }
@@ -174,8 +116,7 @@ public class Game {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
-        } else {
-            return true;  // signal that we want to quit
         }
+        return true;  // signal that we want to quit
     }
 }

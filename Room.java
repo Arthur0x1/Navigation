@@ -15,10 +15,23 @@ import java.util.Set;
  * @author Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
+public enum Room {
+    FORUM("Het forum"),
+    H1("Hantal 1"),
+    H2("Hantal 2"),
+    H3("Hantal 3"),
+    H4("Hantal 4"),
+    H5("Hantal 5"),
+    H6("Hantal 6");
 
-public class Room {
     private final String description;
     private final Map<String, Room> exits;
+
+    static {
+        FORUM.setExits(H6);
+        H6.setExits(H2);
+        H2.setExits(H1, H3, H4, H5);
+    }
 
     /**
      * Create a room described "description". Initially, it has
@@ -27,27 +40,24 @@ public class Room {
      *
      * @param description The room's description.
      */
-    public Room(String description) {
+    Room(String description) {
         this.description = description;
         exits = new HashMap<>();
     }
 
-    /**
-     * Define an exit from this room.
-     *
-     * @param direction The direction of the exit.
-     * @param neighbor  The room to which the exit leads.
+    /*
+    Defines exits for this room.
+    This also sets this room as an exit to the passed rooms.
      */
-    public void setExit(String direction, Room neighbor) {
-        exits.put(direction, neighbor);
+    private void setExits(Room... rooms) {
+        for (Room room : rooms) {
+            exits.put(room.getName(), room);
+            room.exits.put(getName(), this);
+        }
     }
 
-    /**
-     * @return The short description of the room
-     * (the one that was defined in the constructor).
-     */
-    public String getShortDescription() {
-        return description;
+    private String getName() {
+        return name().toLowerCase();
     }
 
     /**

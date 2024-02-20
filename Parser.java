@@ -32,16 +32,14 @@ public class Parser {
      * @return The next command from the user.
      */
     public Command getCommand() {
-        String inputLine;   // will hold the full input line
         String word1 = null;
         String word2 = null;
 
         System.out.print("> ");     // print prompt
 
-        inputLine = reader.nextLine();
-
-        // Find up to two words on the line.
+        String inputLine = reader.nextLine();
         Scanner tokenizer = new Scanner(inputLine);
+        // find up to two words in one line
         if (tokenizer.hasNext()) {
             word1 = tokenizer.next();      // get first word
             if (tokenizer.hasNext()) {
