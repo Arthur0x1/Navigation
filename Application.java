@@ -37,10 +37,11 @@ public class Application {
     }
 
     /*
+    /*
     Returns a list of rooms to traverse to get from start to destination.
     The destination is included in the returned list.
     Returns {@code Collections.emptyList()} when start and destination are the same.
-     */
+     * /
     private static List<Room> findPath(Room start, Room destination) {
         // only start location H2 and FORUM require intermediary 'rooms' to be entered
         // e.g. H2 -> H6 -> FORUM
@@ -113,6 +114,7 @@ public class Application {
             };
         };
     }
+    */
 
     // implementations of user commands:
 
@@ -145,7 +147,7 @@ public class Application {
             //System.out.println("There is no door!");
             System.out.println("Room does not exist");
         } else {
-            List<Room> path = findPath(currentRoom, nextRoom);
+            //List<Room> path = findPath(currentRoom, nextRoom);
             System.out.printf("path: [%s]\n", path.stream().map(Room::getName)
                     .collect(Collectors.joining(" ")));
             currentRoom = nextRoom;

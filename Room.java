@@ -33,23 +33,35 @@ public enum Room {
     H4_1,
     H4_2,
     H4_3,
+    H5_0,
+    // H5
     H5_1,
     H5_2,
+    // H6
     H6_1,
     H6_2;
-
-    private final int x, y;
     private final Map<String, Room> exits = new HashMap<>();
 
-    Room(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     static {
-        FORUM.setExits(H6);
-        H6.setExits(H2);
-        H2.setExits(H1, H3, H4, H5);
+        FORUM.setExits(H6_1);
+        H1_1.setExits(H1_2, H1_3, H2_1);
+        H1_2.setExits(H1_1, H1_3);
+        H1_3.setExits(H1_4, H1_2, H1_1);
+        H1_4.setExits(H1_3);
+        H2_1.setExits(H1_1, H2_2, H3_1, H6_2);
+        H2_2.setExits(H2_1, H2_3);
+        H2_3.setExits(H2_2, H4_1, H5_0);
+        H3_1.setExits(H2_1, H3_2, H3_3);
+        H3_2.setExits(H3_1, H3_3);
+        H3_3.setExits(H3_2, H3_1);
+        H4_1.setExits(H4_2, H4_3, H2_3);
+        H4_2.setExits(H4_1, H4_3);
+        H4_3.setExits(H4_2, H4_1);
+        H5_0.setExits(H5_1, H2_3);
+        H5_1.setExits(H5_2, H5_0);
+        H5_2.setExits(H5_1);
+        H6_1.setExits(FORUM, H6_2);
+        H6_2.setExits(H2_1, H6_1);
     }
 
     static Room fromString(String str) {
